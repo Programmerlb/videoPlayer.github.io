@@ -7,9 +7,7 @@
 </head>
 <body>
     <h1 id="videoTitle">Title</h1>
-    <video id="videoPlayer" width="720px" height="480px" controls>
-
-    </video>
+    <div id="videoPlayer"></div>
     <br>
     <p id="videoDesc">Description</p>
     
@@ -18,7 +16,7 @@
             id: 1,
             title: "Trailer of Series",
             desc: "This is a short trailer",
-            VideoName: "Trailer.mp4"
+            VideoUrl: "https://www.youtube.com/embed/G84p7eCplkI?si=9_qcF0epQL3mqY66" 
         };
         const vid2 = {
             id: 2,
@@ -40,6 +38,7 @@
 
         let currentVideo;
         
+        
         videos.forEach(function(video){
             if(video.id == videoId){
                 currentVideo = video;
@@ -51,9 +50,29 @@
         }
 
         title.innerHTML = currentVideo.title;
-        videoPlayer.src = currentVideo.VideoName;
         description.innerHTML = currentVideo.desc;
         
+
+        if (currentVideo.VideoUrl) {
+            const iframe = document.createElement("iframe");
+            iframe.width = "720";
+            iframe.height = "480";
+            iframe.frameBorder = "0";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            iframe.src = currentVideo.VideoUrl;
+            videoPlayer.appendChild(iframe);
+        } else if (currentVideo.VideoName) {
+            const video = document.createElement("video");
+            video.width = "720";
+            video.height = "480";
+            video.controls = true;
+            const source = document.createElement("source");
+            source.src = currentVideo.VideoName;
+            source.type = "video/mp4";
+            video.appendChild(source);
+            videoPlayer.appendChild(video);
+        }
     </script>
 </body>
 </html>
