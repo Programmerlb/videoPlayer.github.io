@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="videoTitle">Title</h1>
+    <video id="videoPlayer" width="720px" height="480px" controls>
+
+    </video>
+    <br>
+    <p id="videoDesc">Description</p>
+    
+    <script>
+        const vid1 = {
+            id: 1,
+            title: "Trailer of Series",
+            desc: "This is a short trailer",
+            VideoName: "Trailer.mp4"
+        };
+        const vid2 = {
+            id: 2,
+            title: "Programming Session",
+            desc: "This is a Programming Session",
+            VideoName: "session.mp4"
+        };
+
+        const videos = [vid1, vid2];
+        const title = document.getElementById("videoTitle");
+        const videoPlayer = document.getElementById("videoPlayer");
+        const description = document.getElementById("videoDesc");
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get("id");
+
+        if(!videoId){
+            window.location.href = "file:///C:/Users/Ali%20Rammal/Desktop/Resources/Web%20Development/youbee%20course/videos/index.html";
+        }
+
+        let currentVideo;
+        
+        videos.forEach(function(video){
+            if(video.id == videoId){
+                currentVideo = video;
+            }
+        });
+
+        if(!currentVideo){
+            window.location.href = "file:///C:/Users/Ali%20Rammal/Desktop/Resources/Web%20Development/youbee%20course/videos/index.html";
+        }
+
+        title.innerHTML = currentVideo.title;
+        videoPlayer.src = currentVideo.VideoName;
+        description.innerHTML = currentVideo.desc;
+        
+    </script>
+</body>
+</html>
